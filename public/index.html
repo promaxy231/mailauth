@@ -199,16 +199,27 @@
     <section id="donate" class="mt-16 max-w-xl mx-auto">
       <div class="glass rounded-2xl p-6 sm:p-8 text-center border-brand-500/20">
         <h2 class="text-lg font-semibold mb-2">Help make MailAuth better</h2>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
           MailAuth is free and always will be for basic checks.
           If it saved you time, a small donation helps cover hosting, a proper domain,
           and future features like monitoring and multi-domain support.
         </p>
+
+        <div class="text-left mb-5">
+          <p class="text-xs text-zinc-500 mb-2 font-medium tracking-wide uppercase">Monero (XMR)</p>
+          <div class="flex items-center gap-2 glass rounded-xl p-3 border border-white/10">
+            <code id="xmrAddress" class="text-[11px] sm:text-xs text-zinc-300 break-all flex-1 font-mono leading-relaxed select-all">
+              46r5h4irKeCXeHtKpMMiXWUzG9gzYW7o7jeKzXdVNF23cXtcBYVsT1pJKpFL1gAGhP5wJRVHSZBkyKG96iFniNd4D5BhM9a
+            </code>
+            <button id="copyXmr" type="button"
+              class="shrink-0 px-3 py-1.5 text-xs font-medium rounded-lg bg-brand-500/20 text-brand-400 hover:bg-brand-500/30 transition border border-brand-500/30">
+              Copy
+            </button>
+          </div>
+          <p class="text-[11px] text-zinc-600 mt-2">Anonymous • No account required</p>
+        </div>
+
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="https://ko-fi.com/" target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-medium px-5 py-2.5 rounded-xl transition text-sm">
-            Donate on Ko-fi
-          </a>
           <a href="https://github.com/promaxy231/mailauth" target="_blank" rel="noopener"
              class="inline-flex items-center justify-center gap-2 glass hover:bg-white/5 text-zinc-300 font-medium px-5 py-2.5 rounded-xl transition text-sm">
             Star on GitHub
@@ -238,6 +249,30 @@
     </div>
   </footer>
 
+  <script>
+    // Copy Monero address
+    document.getElementById('copyXmr')?.addEventListener('click', async () => {
+      const address = document.getElementById('xmrAddress')?.textContent?.trim();
+      if (!address) return;
+      try {
+        await navigator.clipboard.writeText(address);
+        const btn = document.getElementById('copyXmr');
+        const original = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
+        }, 1800);
+      } catch (e) {
+        // Fallback for older browsers
+        const range = document.createRange();
+        range.selectNode(document.getElementById('xmrAddress'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      }
+    });
+  </script>
   <script src="./app.js"></script>
 </body>
 </html>
