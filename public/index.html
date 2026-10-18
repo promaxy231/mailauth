@@ -3,9 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary SEO -->
   <title>MailAuth — Free SPF, DKIM & DMARC Checker</title>
-  <meta name="description" content="Free, privacy-first domain email authentication checker. Instantly analyze SPF, DKIM and DMARC with clear explanations and actionable fixes." />
-  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Free, privacy-first SPF, DKIM and DMARC checker. Instant domain email authentication analysis with clear explanations and exact fixes. No signup, no tracking." />
+  <meta name="keywords" content="SPF checker, DKIM checker, DMARC checker, email authentication, free DMARC tool, domain security, email deliverability" />
+  <meta name="author" content="MailAuth" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mailauth.promaxy231.workers.dev/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mailauth.promaxy231.workers.dev/" />
+  <meta property="og:title" content="MailAuth — Free SPF, DKIM & DMARC Checker" />
+  <meta property="og:description" content="Instant, privacy-first email authentication analysis. Clear scores, actionable fixes, no account required." />
+  <meta property="og:site_name" content="MailAuth" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MailAuth — Free SPF, DKIM & DMARC Checker" />
+  <meta name="twitter:description" content="Free domain email authentication checker. SPF, DKIM, DMARC with clear explanations." />
+
+  <meta name="theme-color" content="#09090b" />
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -32,7 +52,6 @@
   <style>
     body { background: #09090b; font-family: 'Inter', system-ui, sans-serif; }
     .glass { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
-    .glass-hover:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
     pre, code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
     .score-ring { transition: stroke-dashoffset 0.8s ease; }
   </style>
@@ -40,7 +59,7 @@
 <body class="text-zinc-100 antialiased min-h-screen">
 
   <!-- Header -->
-  <header class="border-b border-white/5">
+  <header class="border-b border-white/5 sticky top-0 bg-[#09090b]/80 backdrop-blur-md z-50">
     <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
         <div class="w-7 h-7 rounded-md bg-brand-500 flex items-center justify-center">
@@ -49,9 +68,10 @@
           </svg>
         </div>
         <span class="font-semibold tracking-tight">MailAuth</span>
+        <span class="text-[11px] font-medium px-1.5 py-0.5 rounded bg-brand-500/15 text-brand-400 border border-brand-500/20">Free</span>
       </div>
-      <div class="flex items-center gap-4 text-sm text-zinc-500">
-        <span class="hidden sm:inline">No signup • No tracking</span>
+      <div class="flex items-center gap-5 text-sm text-zinc-500">
+        <a href="#donate" class="hover:text-zinc-300 transition hidden sm:inline">Support</a>
         <a href="#privacy" class="hover:text-zinc-300 transition">Privacy</a>
       </div>
     </div>
@@ -61,12 +81,13 @@
 
     <!-- Hero -->
     <div class="text-center mb-12">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+      <p class="text-sm font-medium text-brand-400 mb-3 tracking-wide">Free forever • No signup • Privacy-first</p>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4 leading-tight">
         Is your email authentication<br class="hidden sm:block"> actually working?
       </h1>
       <p class="text-zinc-400 max-w-lg mx-auto text-[15px] leading-relaxed">
-        Free SPF, DKIM & DMARC analysis with clear explanations and exact fixes.
-        Runs entirely in your browser.
+        Instant SPF, DKIM & DMARC analysis with clear scores and exact fixes.
+        Built for quality, not clutter.
       </p>
     </div>
 
@@ -145,11 +166,59 @@
         <ul id="recommendations" class="space-y-3 text-sm"></ul>
       </div>
 
-      <!-- Trust note -->
       <p class="text-center text-xs text-zinc-600 pt-2">
         Analysis performed locally in your browser via Cloudflare DNS-over-HTTPS.
       </p>
     </div>
+
+    <!-- Why free / Quality pitch -->
+    <section class="mt-20 max-w-2xl mx-auto text-center">
+      <h2 class="text-xl font-semibold mb-3">Built for quality, kept free</h2>
+      <p class="text-zinc-400 text-[15px] leading-relaxed mb-6">
+        Most free checkers are cluttered, incomplete, or push you into paid plans.
+        MailAuth focuses on clear results, honest scoring, and privacy.
+        No accounts. No tracking. No upsell walls.
+      </p>
+      <div class="grid sm:grid-cols-3 gap-4 text-sm">
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">UI & clarity</p>
+          <p class="text-zinc-500">Scores and fixes you can actually understand</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">Privacy-first</p>
+          <p class="text-zinc-500">Everything runs in your browser</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">Honest scoring</p>
+          <p class="text-zinc-500">No inflated grades or vague warnings</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donate -->
+    <section id="donate" class="mt-16 max-w-xl mx-auto">
+      <div class="glass rounded-2xl p-6 sm:p-8 text-center border-brand-500/20">
+        <h2 class="text-lg font-semibold mb-2">Help make MailAuth better</h2>
+        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+          MailAuth is free and always will be for basic checks.
+          If it saved you time, a small donation helps cover hosting, a proper domain,
+          and future features like monitoring and multi-domain support.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://ko-fi.com/" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-medium px-5 py-2.5 rounded-xl transition text-sm">
+            Donate on Ko-fi
+          </a>
+          <a href="https://github.com/promaxy231/mailauth" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 glass hover:bg-white/5 text-zinc-300 font-medium px-5 py-2.5 rounded-xl transition text-sm">
+            Star on GitHub
+          </a>
+        </div>
+        <p class="text-xs text-zinc-600 mt-4">
+          Once we reach enough support we’ll get a proper domain and add optional paid monitoring.
+        </p>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
