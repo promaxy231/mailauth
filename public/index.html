@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="c3sxAeqD1ffH6Y2GwAvvP42Rxvzum0f4_WHciwMO51M" />
+
   <!-- Primary SEO -->
   <title>MailAuth — Free SPF, DKIM & DMARC Checker</title>
-  <meta name="description" content="Free, privacy-first SPF, DKIM and DMARC checker. Instant domain email authentication analysis with clear explanations and exact fixes. No signup, no tracking." />
-  <meta name="keywords" content="SPF checker, DKIM checker, DMARC checker, email authentication, free DMARC tool, domain security, email deliverability" />
+  <meta name="description" content="Free, privacy-first SPF, DKIM, DMARC and MX checker. Instant domain email authentication analysis with clear scores, lookup counts, and exact fixes. No signup, no tracking." />
+  <meta name="keywords" content="SPF checker, DKIM checker, DMARC checker, free DMARC tool, email authentication, domain security, email deliverability, MX check, SPF lookup limit" />
   <meta name="author" content="MailAuth" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://mailauth.promaxy231.workers.dev/" />
@@ -16,13 +19,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mailauth.promaxy231.workers.dev/" />
   <meta property="og:title" content="MailAuth — Free SPF, DKIM & DMARC Checker" />
-  <meta property="og:description" content="Instant, privacy-first email authentication analysis. Clear scores, actionable fixes, no account required." />
+  <meta property="og:description" content="Instant, privacy-first email authentication analysis. SPF, DKIM, DMARC, MX with clear scores and actionable fixes. No account required." />
   <meta property="og:site_name" content="MailAuth" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="MailAuth — Free SPF, DKIM & DMARC Checker" />
-  <meta name="twitter:description" content="Free domain email authentication checker. SPF, DKIM, DMARC with clear explanations." />
+  <meta name="twitter:description" content="Free domain email authentication checker. SPF, DKIM, DMARC, MX with clear explanations." />
 
   <meta name="theme-color" content="#09090b" />
   
@@ -71,6 +74,7 @@
         <span class="text-[11px] font-medium px-1.5 py-0.5 rounded bg-brand-500/15 text-brand-400 border border-brand-500/20">Free</span>
       </div>
       <div class="flex items-center gap-5 text-sm text-zinc-500">
+        <a href="#how" class="hover:text-zinc-300 transition hidden sm:inline">How it works</a>
         <a href="#donate" class="hover:text-zinc-300 transition hidden sm:inline">Support</a>
         <a href="#privacy" class="hover:text-zinc-300 transition">Privacy</a>
       </div>
@@ -80,43 +84,61 @@
   <main class="max-w-4xl mx-auto px-4 py-12 sm:py-16">
 
     <!-- Hero -->
-    <div class="text-center mb-12">
+    <div class="text-center mb-10">
       <p class="text-sm font-medium text-brand-400 mb-3 tracking-wide">Free forever • No signup • Privacy-first</p>
       <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4 leading-tight">
         Is your email authentication<br class="hidden sm:block"> actually working?
       </h1>
       <p class="text-zinc-400 max-w-lg mx-auto text-[15px] leading-relaxed">
-        Instant SPF, DKIM & DMARC analysis with clear scores and exact fixes.
-        Built for quality, not clutter.
+        Instant SPF, DKIM, DMARC &amp; MX analysis with clear scores, lookup counts, and exact fixes.
       </p>
     </div>
 
     <!-- Input -->
-    <div class="glass rounded-2xl p-5 sm:p-6 mb-8 max-w-xl mx-auto">
-      <form id="checkForm" class="flex flex-col sm:flex-row gap-3">
-        <div class="relative flex-1">
+    <div class="glass rounded-2xl p-5 sm:p-6 mb-6 max-w-xl mx-auto">
+      <form id="checkForm" class="space-y-3">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <input
+              type="text"
+              id="domainInput"
+              placeholder="example.com"
+              maxlength="253"
+              autocomplete="off"
+              spellcheck="false"
+              class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-[15px] focus:outline-none focus:border-brand-500/60 focus:ring-1 focus:ring-brand-500/30 transition placeholder:text-zinc-600"
+            />
+          </div>
+          <button
+            type="submit"
+            id="checkBtn"
+            class="bg-brand-500 hover:bg-brand-400 active:bg-brand-600 text-white font-medium px-6 py-3 rounded-xl transition flex items-center justify-center gap-2 min-w-[130px] disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            <span id="btnText">Check</span>
+            <svg id="spinner" class="hidden animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
+          <label class="text-xs text-zinc-500 shrink-0">Custom DKIM selector (optional)</label>
           <input
             type="text"
-            id="domainInput"
-            placeholder="example.com"
-            maxlength="253"
+            id="selectorInput"
+            placeholder="e.g. google, s1, selector1"
+            maxlength="63"
             autocomplete="off"
             spellcheck="false"
-            class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-[15px] focus:outline-none focus:border-brand-500/60 focus:ring-1 focus:ring-brand-500/30 transition placeholder:text-zinc-600"
+            class="w-full sm:flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500/50 transition placeholder:text-zinc-600 font-mono"
           />
         </div>
-        <button
-          type="submit"
-          id="checkBtn"
-          class="bg-brand-500 hover:bg-brand-400 active:bg-brand-600 text-white font-medium px-6 py-3 rounded-xl transition flex items-center justify-center gap-2 min-w-[130px] disabled:opacity-60 disabled:cursor-not-allowed"
-        >
-          <span id="btnText">Check</span>
-          <svg id="spinner" class="hidden animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-          </svg>
-        </button>
       </form>
+      <div class="flex flex-wrap gap-2 mt-4 justify-center">
+        <button type="button" class="example-btn text-xs px-3 py-1.5 rounded-lg glass hover:bg-white/5 text-zinc-400 hover:text-zinc-200 transition" data-domain="google.com">google.com</button>
+        <button type="button" class="example-btn text-xs px-3 py-1.5 rounded-lg glass hover:bg-white/5 text-zinc-400 hover:text-zinc-200 transition" data-domain="microsoft.com">microsoft.com</button>
+        <button type="button" class="example-btn text-xs px-3 py-1.5 rounded-lg glass hover:bg-white/5 text-zinc-400 hover:text-zinc-200 transition" data-domain="github.com">github.com</button>
+      </div>
       <p class="text-xs text-zinc-600 mt-3 text-center">
         Public DNS only. Nothing is stored.
       </p>
@@ -150,10 +172,21 @@
       </div>
 
       <!-- Status Cards -->
-      <div class="grid sm:grid-cols-3 gap-3" id="statusCards"></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3" id="statusCards"></div>
 
       <!-- Details -->
       <div id="details" class="space-y-3"></div>
+
+      <!-- Suggested records -->
+      <div id="suggestedBox" class="hidden glass rounded-2xl p-5 sm:p-6">
+        <h2 class="font-semibold mb-3 flex items-center gap-2">
+          <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Suggested records
+        </h2>
+        <div id="suggestedContent" class="space-y-4 text-sm"></div>
+      </div>
 
       <!-- Recommendations -->
       <div class="glass rounded-2xl p-5 sm:p-6">
@@ -171,8 +204,57 @@
       </p>
     </div>
 
+    <!-- How it works -->
+    <section id="how" class="mt-20 max-w-2xl mx-auto">
+      <h2 class="text-xl font-semibold mb-3 text-center">How it works</h2>
+      <p class="text-zinc-400 text-[15px] leading-relaxed mb-6 text-center">
+        MailAuth reads public DNS records the same way receiving mail servers do. Everything runs in your browser — no backend, no logs of the domains you check.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm">
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">SPF</p>
+          <p class="text-zinc-500">Checks for a valid record, terminating mechanism, and estimates DNS lookups against the 10-lookup limit.</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">DKIM</p>
+          <p class="text-zinc-500">Probes common selectors plus any custom selector you provide. Flags short or revoked keys.</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">DMARC</p>
+          <p class="text-zinc-500">Validates policy strength, reporting addresses (rua), and subdomain policy.</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">MX</p>
+          <p class="text-zinc-500">Confirms the domain can receive mail and that MX hosts resolve.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mt-16 max-w-2xl mx-auto">
+      <h2 class="text-xl font-semibold mb-6 text-center">FAQ</h2>
+      <div class="space-y-4 text-sm">
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">Is this really free and private?</p>
+          <p class="text-zinc-500">Yes. Lookups go directly from your browser to Cloudflare’s public DNS-over-HTTPS. We do not store the domains you check.</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">Why didn’t it find my DKIM key?</p>
+          <p class="text-zinc-500">Many providers use custom selectors. Enter yours in the “Custom DKIM selector” field and run the check again.</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">What does the SPF lookup limit mean?</p>
+          <p class="text-zinc-500">SPF allows at most 10 DNS lookups (includes, a, mx, etc.). Exceeding it causes a permanent error and can break delivery.</p>
+        </div>
+        <div class="glass rounded-xl p-4">
+          <p class="font-medium text-zinc-200 mb-1">Does a high score guarantee inbox placement?</p>
+          <p class="text-zinc-500">No. Authentication is necessary but not sufficient. Reputation, content, and engagement still matter.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Why free / Quality pitch -->
-    <section class="mt-20 max-w-2xl mx-auto text-center">
+    <section class="mt-16 max-w-2xl mx-auto text-center">
       <h2 class="text-xl font-semibold mb-3">Built for quality, kept free</h2>
       <p class="text-zinc-400 text-[15px] leading-relaxed mb-6">
         Most free checkers are cluttered, incomplete, or push you into paid plans.
@@ -250,7 +332,6 @@
   </footer>
 
   <script>
-    // Copy Monero address
     document.getElementById('copyXmr')?.addEventListener('click', async () => {
       const address = document.getElementById('xmrAddress')?.textContent?.trim();
       if (!address) return;
@@ -265,7 +346,6 @@
           btn.classList.remove('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
         }, 1800);
       } catch (e) {
-        // Fallback for older browsers
         const range = document.createRange();
         range.selectNode(document.getElementById('xmrAddress'));
         window.getSelection().removeAllRanges();
